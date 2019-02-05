@@ -1,0 +1,26 @@
+{
+  "name": "open-api-schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --inspect src/index.ts",
+    "build": "tsc -p .",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^24.0.0",
+    "@types/js-yaml": "^3.12.0",
+    "@types/node": "^10.12.21",
+    "jest": "^24.1.0",
+    "ts-jest": "^23.10.5",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.3.1"
+  },
+  "dependencies": {
+    "js-yaml": "^3.12.1"
+  }
+}
