@@ -4,6 +4,8 @@ Converts open-api / swagger files to json schema objects ready to use with json 
 
 ## Usage
 ```javascript
+import openApiToSchema from 'open-api-to-schema'
+
 const config = {
   required: 'all',
   optionalFields: {
@@ -11,7 +13,7 @@ const config = {
   }
 }
 
-const jsonSchema = openApiSchema('./test/fixtures/petstore-expanded.yaml', config)
+const jsonSchema = openApiToSchema('./test/fixtures/petstore-expanded.yaml', config)
 ...
 ```
 
