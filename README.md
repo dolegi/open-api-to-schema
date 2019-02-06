@@ -13,6 +13,13 @@ const jsonSchema = openApiSchema('./test/fixtures/petstore-expanded.yaml', confi
 ...
 ```
 
+## Returns
+Returns a valid [JSON Schema draft 7](https://tools.ietf.org/html/draft-handrews-json-schema-01) object ready to be used with json validation libraries such as [ajv](https://www.npmjs.com/package/ajv).
+
+Definitions and paths are root objects.
+
+See [Example Response](##Example Response)
+
 ## Config
 
 ### `required`
@@ -43,3 +50,155 @@ Has definition name as key with array of required fields
 }
 ```
 
+## Example Response
+```json
+{
+  "/pets": {
+    "get": {
+      "200": {
+        "type": "array",
+        "items": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "$name": "Pet",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "tag": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "required": [
+            "name",
+            "tag"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "default": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$name": "Error"
+      }
+    },
+    "post": {
+      "200": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$name": "Pet",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "name",
+          "tag"
+        ],
+        "additionalProperties": false
+      },
+      "default": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$name": "Error"
+      }
+    }
+  },
+  "/pets/{id}": {
+    "get": {
+      "200": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$name": "Pet",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "name",
+          "tag"
+        ],
+        "additionalProperties": false
+      },
+      "default": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$name": "Error"
+      }
+    },
+    "delete": {
+      "204": {},
+      "default": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$name": "Error"
+      }
+    }
+  }
+}
+```
