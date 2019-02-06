@@ -19,8 +19,7 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src/**/*",
-    "test/**/*"
+    "src/**/*"
   ],
   "typeRoots": [
     "src/index.d.ts"

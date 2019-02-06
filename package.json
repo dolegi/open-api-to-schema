@@ -1,8 +1,8 @@
 {
-  "name": "open-api-schema",
-  "version": "1.0.0",
+  "name": "open-api-to-schema",
+  "version": "1.0.1",
   "description": "Open API / Swagger file to JSON Schema Converter",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "ts-node-dev --inspect src/index.ts",
     "build": "tsc -p .",
@@ -22,5 +22,8 @@
   },
   "dependencies": {
     "js-yaml": "^3.12.1"
-  }
+  },
+  "files": [
+    "dist/index.js"
+  ]
 }

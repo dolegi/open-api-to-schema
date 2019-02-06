@@ -1,7 +1,9 @@
 # Open api schema converter
 
+Converts open-api / swagger files to json schema objects ready to use with json schema validation libraries.
+
 ## Usage
-```
+```javascript
 const config = {
   required: 'all',
   optionalFields: {
