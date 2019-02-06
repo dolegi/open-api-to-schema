@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index Converts schema with optional fields 1`] = `
+Object {
+  "definitions": Object {
+    "Error": Object {
+      "$name": "Error",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "properties": Object {
+        "code": Object {
+          "format": "int32",
+          "type": "integer",
+        },
+        "message": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "code",
+        "message",
+      ],
+    },
+    "NewPet": Object {
+      "$name": "NewPet",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+        "tag": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+    },
+    "Pet": Object {
+      "$name": "Pet",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "additionalProperties": false,
+      "properties": Object {
+        "id": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "name": Object {
+          "type": "string",
+        },
+        "tag": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "tag",
+      ],
+    },
+  },
+  "paths": Object {
+    "/pets": Object {
+      "get": Object {
+        "200": Object {
+          "items": Object {
+            "$name": "Pet",
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "additionalProperties": false,
+            "properties": Object {
+              "id": Object {
+                "format": "int64",
+                "type": "integer",
+              },
+              "name": Object {
+                "type": "string",
+              },
+              "tag": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "name",
+              "tag",
+            ],
+          },
+          "type": "array",
+        },
+        "default": Object {
+          "$name": "Error",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "properties": Object {
+            "code": Object {
+              "format": "int32",
+              "type": "integer",
+            },
+            "message": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "code",
+            "message",
+          ],
+        },
+      },
+      "post": Object {
+        "200": Object {
+          "$name": "Pet",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": false,
+          "properties": Object {
+            "id": Object {
+              "format": "int64",
+              "type": "integer",
+            },
+            "name": Object {
+              "type": "string",
+            },
+            "tag": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "name",
+            "tag",
+          ],
+        },
+        "default": Object {
+          "$name": "Error",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "properties": Object {
+            "code": Object {
+              "format": "int32",
+              "type": "integer",
+            },
+            "message": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "code",
+            "message",
+          ],
+        },
+      },
+    },
+    "/pets/{id}": Object {
+      "delete": Object {
+        "204": Object {},
+        "default": Object {
+          "$name": "Error",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "properties": Object {
+            "code": Object {
+              "format": "int32",
+              "type": "integer",
+            },
+            "message": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "code",
+            "message",
+          ],
+        },
+      },
+      "get": Object {
+        "200": Object {
+          "$name": "Pet",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": false,
+          "properties": Object {
+            "id": Object {
+              "format": "int64",
+              "type": "integer",
+            },
+            "name": Object {
+              "type": "string",
+            },
+            "tag": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "name",
+            "tag",
+          ],
+        },
+        "default": Object {
+          "$name": "Error",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "properties": Object {
+            "code": Object {
+              "format": "int32",
+              "type": "integer",
+            },
+            "message": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "code",
+            "message",
+          ],
+        },
+      },
+    },
+  },
+}
+`;

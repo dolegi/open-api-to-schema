@@ -1,25 +1,27 @@
 import fs from 'fs'
 import jsYaml from 'js-yaml'
+import path from 'path'
 
 const SCHEMA_VERSION = 'http://json-schema.org/draft-07/schema#'
 
-type Fields = {
+export type Fields = {
   [x: string]: [
     string
   ]
 }
 
-enum Required {
+export enum Required {
   ALL = 'all',
   NONE = 'none',
   RESPECT = 'respect'
 }
 
-type Config = {
+export type Config = {
   optionalFields?: Fields
   requiredFields?: Fields
   required: Required
 }
+
 let definitions: object = {}
 let fields: Fields = {}
 let required: Required = Required.RESPECT
@@ -30,7 +32,11 @@ function getRequiredObj (definition) {
     case Required.RESPECT:
       return definition.required || []
     case Required.ALL:
-      return Object.keys(definition.properties).filter(x => (fields[definition['$name']] || []).indexOf(x) === - 1)
+      return Object.keys(definition.properties).filter(key => {
+        const field = fields[definition['$name']]
+
+        return !field || field.indexOf(key) === - 1
+      })
     case Required.NONE:
       return fields[definition['$name']] || []
   }
@@ -94,12 +100,12 @@ function replaceRefs (oDefinition) {
 
 export default function convert (filePath: string, config: Config) {
   if (!fs.existsSync(filePath)) {
-    throw Error(`Could not find swagger file at: ${filePath}`)
+    throw Error(`Could not find swagger file at: ${path.resolve(filePath)}`)
   }
   const file = fs.readFileSync(filePath).toString('utf-8')
   const data = jsYaml.safeLoad(file)
   definitions = data.definitions
-  required = config.required
+  required = config.required || Required.RESPECT
   switch (required) {
     case Required.RESPECT:
       fields = {}
@@ -137,12 +143,3 @@ export default function convert (filePath: string, config: Config) {
   return schema
 }
 
-const config: Config = {
-  required: Required.ALL,
-  optionalFields: {
-    Pet: [ 'id' ]
-  }
-}
-
-convert(process.argv[3], config)
-console.log(JSON.stringify(schema.paths))
