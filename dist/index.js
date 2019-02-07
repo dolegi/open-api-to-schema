@@ -16,7 +16,7 @@ var Required;
 let definitions = {};
 let fields = {};
 let required = Required.RESPECT;
-const schema = { definitions: {}, paths: {} };
+let schema = { definitions: {}, paths: {} };
 function getRequiredObj(definition) {
     switch (required) {
         case Required.RESPECT:
@@ -78,6 +78,10 @@ function replaceRefs(oDefinition) {
     return definition;
 }
 function convert(filePath, config) {
+    definitions = {};
+    fields = {};
+    required = Required.RESPECT;
+    schema = { definitions: {}, paths: {} };
     if (!fs_1.default.existsSync(filePath)) {
         throw Error(`Could not find swagger file at: ${path_1.default.resolve(filePath)}`);
     }

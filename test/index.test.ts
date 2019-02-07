@@ -1,4 +1,5 @@
-import openApiSchema, { Config, Required } from '../src/index'
+import openApiSchema from '../src/index'
+import { Config, Required } from '../src/types'
 
 describe('index', () => {
   test('Converts schema with optional fields', () => {

@@ -53,6 +53,14 @@ Has definition name as key with array of required fields
   [definitionName]: [ 'required' ]
 }
 ```
+## Features
+
+- [X] Allof
+- [ ] Oneof
+- [ ] Anyof
+- [X] Expose definitions
+- [X] Expose paths
+- [X] Override requiring
 
 ## Example Response
 ```json
@@ -206,3 +214,4 @@ Has definition name as key with array of required fields
   }
 }
 ```
+

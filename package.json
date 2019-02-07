@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "ts-node-dev --inspect src/index.ts",
-    "build": "tsc -p .",
+    "build": "tsc --declaration -p .",
     "test": "jest"
   },
-  "keywords": [ "open-api", "swagger", "json-schema" ],
+  "keywords": [ "open-api", "swagger", "json-schema", "converter", "validation" ],
   "author": "Dominic Ginger",
   "license": "MIT",
   "devDependencies": {
@@ -24,6 +24,6 @@
     "js-yaml": "^3.12.1"
   },
   "files": [
-    "dist/index.js"
+    "dist/"
   ]
 }
