@@ -3,8 +3,11 @@
 Converts open-api / swagger files to json schema objects ready to use with json schema validation libraries.
 
 ## Usage
+`npm install --save open-api-to-schema`
+
 ```javascript
 import openApiToSchema from 'open-api-to-schema'
+import Ajv from 'ajv'
 
 const config = {
   required: 'all',
@@ -13,7 +16,16 @@ const config = {
   }
 }
 
-const jsonSchema = openApiToSchema('./test/fixtures/petstore-expanded.yaml', config)
+const jsonSchemas = openApiToSchema('./test/fixtures/petstore-expanded.yaml', config)
+
+const ajv = new Ajv()
+const validator = ajv.compile(jsonSchema.paths['/pet'].get[200])
+
+const valid = validator(response.data)
+
+if (!valid) {
+  console.error(validator.errors)
+}
 ...
 ```
 
