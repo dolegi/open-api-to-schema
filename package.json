@@ -1,6 +1,6 @@
 {
   "name": "open-api-to-schema",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Open API / Swagger file to JSON Schema Converter",
   "main": "dist/index.js",
   "scripts": {
@@ -25,5 +25,9 @@
   },
   "files": [
     "dist/"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DominicGinger/open-api-to-schema.git"
+  }
 }
