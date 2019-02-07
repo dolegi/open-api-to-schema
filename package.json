@@ -1,6 +1,6 @@
 {
   "name": "open-api-to-schema",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Open API / Swagger file to JSON Schema Converter",
   "main": "dist/index.js",
   "scripts": {
