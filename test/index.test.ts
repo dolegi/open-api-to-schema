@@ -6,7 +6,7 @@ describe('index', () => {
     const config: Config = {
       required: Required.ALL,
       optionalFields: {
-        Pet: [ 'id' ]
+        Pet: ['id']
       }
     }
 

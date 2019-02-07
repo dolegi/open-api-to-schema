@@ -1,6 +1,6 @@
 {
   "name": "open-api-to-schema",
-  "version": "1.0.5",
+  "version": "1.0.10",
   "description": "Open API / Swagger file to JSON Schema Converter",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,13 @@
     "build": "tsc --declaration -p .",
     "test": "jest"
   },
-  "keywords": [ "open-api", "swagger", "json-schema", "converter", "validation" ],
+  "keywords": [
+    "open-api",
+    "swagger",
+    "json-schema",
+    "converter",
+    "validation"
+  ],
   "author": "Dominic Ginger",
   "license": "MIT",
   "devDependencies": {

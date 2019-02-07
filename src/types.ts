@@ -1,16 +1,9 @@
-export declare type Fields = {
-  [x: string]: [string]
-}
-export enum Required {
-  ALL = "all",
-    NONE = "none",
-    RESPECT = "respect"
-}
 export declare type Config = {
-  optionalFields?: Fields
-  requiredFields?: Fields
-  required: Required
+  optionalFields?: any
+  requiredFields?: any
+  required: string
 }
+
 export declare type Schema = {
   definitions: {
     [x: string]: any
@@ -18,4 +11,10 @@ export declare type Schema = {
   paths: {
     [x: string]: any
   }
+}
+
+export const Required = {
+  ALL: 'all',
+  NONE: 'none',
+  RESPECT: 'respect'
 }

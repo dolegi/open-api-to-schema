@@ -1,7 +1,7 @@
 import fs from 'fs'
 import jsYaml from 'js-yaml'
 import path from 'path'
-import { Fields, Required, Config, Schema } from './types'
+import { Required, Config, Schema } from './types'
 import Converter from './converter'
 
 const SCHEMA_VERSION = 'http://json-schema.org/draft-07/schema#'
@@ -15,9 +15,9 @@ export default function convert (filePath: string, config: Config) {
   const data = jsYaml.safeLoad(file)
 
   const definitions = data.definitions
-  const required: Required = config.required || Required.RESPECT
+  const required: string = config.required || Required.RESPECT
   const schema: Schema = { definitions: {}, paths: {} }
-  let fields: Fields = {}
+  let fields: any = {}
   switch (required) {
     case Required.RESPECT:
       fields = {}
@@ -36,7 +36,7 @@ export default function convert (filePath: string, config: Config) {
     definition['$schema'] = SCHEMA_VERSION
     definition['$name'] = key
 
-    schema.definitions[key] = converter.convertDefinition(definition)
+    schema.definitions[key] = converter.convertDefinition(definition, key)
   })
 
   Object.keys(data.paths).forEach(path => {
@@ -45,7 +45,7 @@ export default function convert (filePath: string, config: Config) {
       schema.paths[path][method] = {}
       Object.keys(data.paths[path][method].responses).forEach(response => {
         if (data.paths[path][method].responses[response].schema) {
-          schema.paths[path][method][response] = converter.convertDefinition(data.paths[path][method].responses[response].schema)
+          schema.paths[path][method][response] = converter.convertDefinition(data.paths[path][method].responses[response].schema, path)
         } else {
           schema.paths[path][method][response] = {}
         }

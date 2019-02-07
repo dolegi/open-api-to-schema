@@ -1,28 +1,31 @@
-import { Fields, Required, Schema } from './types'
+import { Required, Schema } from './types'
 
 export default class Converter {
   schema: Schema
   definitions: object
-  fields: Fields
-  required: Required = Required.RESPECT
+  required: string = Required.RESPECT
+  fields: any
 
   constructor ({ schema, definitions, fields, required }) {
     this.schema = schema
-    this.definitions = definitions
     this.fields = fields
+    this.definitions = definitions
     this.required = required
   }
 
-  convertDefinition = (oDefinition) => {
+  convertDefinition = (oDefinition, name) => {
     let definition = JSON.parse(JSON.stringify(oDefinition || {}))
+    if (oDefinition === '') {
+      definition = ''
+    }
     if (definition.allOf) {
-      return this.allOf(definition)
+      return this.allOf(definition, name)
     }
     if (definition['$ref']) {
       return this.replaceRefs(definition)
     }
     if (definition.type === 'object') {
-      return this.typeObject(definition)
+      return this.typeObject(definition, name)
     }
     if (definition.type === 'array') {
       return this.typeArray(definition)
@@ -31,36 +34,33 @@ export default class Converter {
     return definition
   }
 
-  getRequired = (definition) => {
+  getRequired = (definition, name) => {
+    const filtered: Array<string> = this.fields[name] || []
     switch (this.required) {
       case Required.RESPECT:
         return definition.required || []
       case Required.ALL:
-        return Object.keys(definition.properties).filter(key => {
-          const field = this.fields[definition['$name']]
-
-          return !field || field.indexOf(key) === - 1
-        })
+        return Object.keys(definition.properties).filter(x => filtered.indexOf(x) === - 1)
       case Required.NONE:
-        return this.fields[definition['$name']] || []
+        return Object.keys(definition.properties).filter(x => filtered.indexOf(x) !== - 1)
     }
   }
 
-  allOf = (definition) => {
+  allOf = (definition, name) => {
     const refDefinition = this.replaceRefs(definition.allOf[0])
     definition.properties = { ...refDefinition.properties, ...definition.allOf[1].properties }
 
-    definition.required = this.getRequired(definition)
+    definition.required = this.getRequired(definition, name)
     definition.additionalProperties = false
     delete definition.allOf
 
     return definition
   }
 
-  typeObject = (definition) => {
+  typeObject = (definition, name) => {
     definition.properties = this.replaceRefs(definition.properties)
 
-    definition.required = this.getRequired(definition)
+    definition.required = this.getRequired(definition, name)
     definition.additionalProperties = false
 
     return definition
@@ -76,9 +76,9 @@ export default class Converter {
     Object.keys(definition).forEach(key => {
       if (key === '$ref') {
         const ref = definition[key].slice('#/definitions/'.length)
-        definition = this.schema.definitions[ref] || this.convertDefinition(this.definitions[ref])
+        definition = this.schema.definitions[ref] || this.convertDefinition(this.definitions[ref], ref)
       } else {
-        definition[key] = this.convertDefinition(definition[key])
+        definition[key] = this.convertDefinition(definition[key], key)
       }
     })
     return definition
